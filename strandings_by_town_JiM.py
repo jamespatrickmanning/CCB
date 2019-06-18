@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 
 ### Hardcode strandings by town for 2012-2015 apparently obtained by Xiaojian from strandings excel spreadsheet
 years=['2012','2013','2014','2015']
-towns=['Dennis','Yarmouth Port','Orleans','Barnstable','Truro','Eastham','Wellfleet','Brewster','Woods Hole','Falmouth','Nantasket Beach','Plymouth','Wareham','Yarmouth','Sandwich','East Dennis','Bourne','Nantucket','Hingham','Province town','Chappaquiddick','Marthas Vineyard','Hull','Chatham','West Falmouth','North Truro','West Tisbury','Duxbuy']
+towns=['Dennis','Yarmouth Port','Orleans','Barnstable','Truro','Eastham','Wellfleet','Brewster','Woods Hole','Falmouth','Nantasket Beach','Plymouth','Wareham','Yarmouth','Sandwich','East Dennis','Bourne','Nantucket','Hingham','Provincetown','Chappaquiddick','Marthas Vineyard','Hull','Chatham','West Falmouth','North Truro','West Tisbury','Duxbuy']
 s2012=[118, 1, 18, 67, 25, 27, 65, 66, 1, 1, 1, 1, 1, 2, 9, 1, 1, 1, 1,0,0,0,0,0,0,0,0,0]
 s2013=[36,0,17,4,24,37,33,65,0,0,0,0,0,0,0,0,0,0,0,3,1,0,0,0,0,0,0,0]
 s2014=[38,1,63,88,292,316,286,99,0,1,1,0,0,0,3,0,14,0,0,14,0,1,2,1,1,6,0,0]
@@ -31,7 +31,7 @@ s2015_top=[s2015[i] for i in ind][:numtowns]
 towns_top=[towns[i] for i in ind][:numtowns]
 
 # define a dataframe and plot it
-df=pd.DataFrame(np.array([s2012_top,s2013_top,s2014_top,s2015_top]).T,index=list(towns_top),columns=pd.Index(years,name='year'))
+df=pd.DataFrame(np.array([s2012_top,s2013_top,s2014_top,s2015_top]).T,index=list(towns_top),columns=pd.Index(years,name='Year'))
 df.plot(kind='bar',alpha=0.5,rot=45,fontsize=10,figsize=(11,7))
 plt.show()
 plt.savefig('strandings_by_top'+str(numtowns)+'_towns.png',dpi=400)
