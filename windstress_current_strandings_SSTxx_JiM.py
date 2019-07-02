@@ -15,7 +15,7 @@ import sys
 from pydap.client import open_url
 import time
 import variance_ellipse_function
-rom matplotlib import cm #added for SST colormap gradient in Python 3
+from matplotlib import cm #added for SST colormap gradient in Python 3
 
 #  HARDCODES #############
 temprange=np.arange(5,14,0.05)
