@@ -5,8 +5,9 @@ Figure 10 of CCBay manuscript w/4 panels
 @author: xiaojian
 Assumes preliminary programs s1-s4 have already been run in this folder
 Modified by JiM to underlay Xiaojian's "variance_ellipses"
+Modified by Felicia June 2019 to function in Python 3
 """
-
+conda install -c conda-forge pydap #this is necessary for Python 3
 import numpy as np
 import matplotlib.pyplot as plt
 import datetime as dt
@@ -14,6 +15,7 @@ import sys
 from pydap.client import open_url
 import time
 import variance_ellipse_function
+rom matplotlib import cm #added for SST colormap gradient in Python 3
 
 #  HARDCODES #############
 temprange=np.arange(5,14,0.05)
@@ -64,8 +66,8 @@ vs18_23=np.load('vs18_23.npy')
 # load model velocities derived from MassBay grid
 lo=np.load('lombx.npy')
 la=np.load('lambx.npy')
-umb18_23=np.load('umb18_23.npy')
-vmb18_23=np.load('vmb18_23.npy')
+umb18_23=np.load('umb18_23.npy')#This needs to be requested from the author because it was too large for GitHub
+vmb18_23=np.load('vmb18_23.npy') #This needs to be requested from the author because it was too large for GitHub
 # load 0-30 Nov 2014 winds
 lof=np.load('lo0_30.npy')
 laf=np.load('la0_30.npy')
@@ -104,7 +106,7 @@ ub1 = np.ma.array(ub_mean1, mask=np.isnan(ub_mean))
 vb1 = np.ma.array(vb_mean1, mask=np.isnan(vb_mean))
 Q=axes[0,1].quiver(xxb,yyb,ub1.T,vb1.T,scale=4.)
 qk=axes[0,1].quiverkey(Q,0.1,0.4,0.2, r'$0.2m/s$', fontproperties={'weight': 'bold'},zorder=1)
-print 'plotting variance ellipses'
+print ('plotting variance ellipses')
 variance_ellipse_function.variance_ellipses_under_means(axes[0,1],gbox,legend_pos,legend_size,max_ellipse_to_ignore)
 lonnn=lon
 lattt=lat
@@ -207,11 +209,11 @@ for i in range(len(url)):
     sst_part[(sst_part==-999)]=np.NaN # if sst_part=-999, convert to NaN
     X1,Y1=np.meshgrid(lon[index_lon11:index_lon12],lat[index_lat11:index_lat12])
     if i==0: #upper left
-        conf=axes[0,0].contourf(X1,Y1,sst_part[0],temprange,zorder=0)
+        conf=axes[0,0].contourf(X1,Y1,sst_part[0],temprange,cmap=cm.jet,zorder=0)
     elif i==1: #lower left
-        conf=axes[1,0].contourf(X1,Y1,sst_part[0],temprange,zorder=0)
+        conf=axes[1,0].contourf(X1,Y1,sst_part[0],temprange,cmap=cm.jet,zorder=0)
     else: #i==2
-        conf=axes[1,1].contourf(X1,Y1,sst_part[0],temprange,zorder=0)
+        conf=axes[1,1].contourf(X1,Y1,sst_part[0],temprange,cmap=cm.jet,zorder=0)
 
 fig.subplots_adjust(right=0.83,hspace=0.1,wspace=0.1)
 cbar_ax=fig.add_axes([0.85,0.15,0.015,0.7])#[left,bottom,right,top]
