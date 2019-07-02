@@ -3,14 +3,11 @@
 Created on Fri Sep 15 23:26:47 2017
 
 @author: xiaojian
+Modified by Felicia July 2019: cleared unused strings and updated for Python 3
 """
 
 import numpy as np
-import datetime as dt
-import pandas as pd
-from datetime import datetime, timedelta
 import matplotlib.pyplot as plt
-import csv
 
 windv2012=np.load('2012windv.npy')
 numv2012=np.load('2012numv.npy')
@@ -114,13 +111,13 @@ axes[2,1].set_ylim(ylim)
 axes[3,0].set_ylim(ylim)
 axes[3,1].set_ylim(ylim)
 
-#axes[0,0].set_ylabel('the number of strandings (per 3 days)')
-axes[1,0].set_ylabel('the number of strandings (per 3 days)',fontsize=14)
-#axes[2,0].set_ylabel('the number of strandings (per 3 days)')
-#axes[3,0].set_ylabel('the number of strandings (per 3 days)')
+#axes[0,0].set_ylabel('Number of Strandings (per 3 days)')
+axes[1,0].set_ylabel('Number of Strandings (per 3 days)',fontsize=14)
+#axes[2,0].set_ylabel('Number of Strandings (per 3 days)')
+#axes[3,0].set_ylabel('Number of Strandings (per 3 days)')
 
-axes[0,0].set_title('Eastward wind stress vs strandings on Outer Cape towns',fontsize=14)
-axes[0,1].set_title('Northward wind stress vs strandings on Mid Cape towns',fontsize=14)
+axes[0,0].set_title('Eastward Wind Stress vs Strandings on Outer Cape Towns',fontsize=14)
+axes[0,1].set_title('Northward Wind Stress vs Strandings on Mid Cape Towns',fontsize=14)
 
 wu=[]
 wv=[]
@@ -150,8 +147,8 @@ X=wu
 Y=nu
 z1 = np.polyfit(X, Y, 1)  #一次多项式拟合，相当于线性拟合
 p1 = np.poly1d(z1)
-print z1  #[ 1.          1.49333333]
-print p1  # 1 x + 1.493
+print (z1)  #[ 1.          1.49333333]
+print (p1)  # 1 x + 1.493
 '''
 plt.figure()
 plt.scatter(wu,nu)   
@@ -178,8 +175,8 @@ axes[3,1].plot(xx1,yy1)
 axes[3,0].text(60,200,'r$^2$=%s'%str(np.round(np.corrcoef(wu,nu)[0][1],2)),fontsize=13)
 axes[3,1].text(-10,200,'r$^2$=%s'%str(np.round(np.corrcoef(wv,nv)[0][1],2)),fontsize=13)
 
-axes[3,0].set_xlabel('sum of eastward wind stress per 3 days (pa)',fontsize=13)
-axes[3,1].set_xlabel('sum of northward wind stress per 3 days (pa)',fontsize=13)
+axes[3,0].set_xlabel('Sum of Eastward Wind Stress per 3 days (Pa)',fontsize=13)
+axes[3,1].set_xlabel('Sum of Northward Wind Stress per 3 days (Pa)',fontsize=13)
 
 plt.subplots_adjust(wspace=0.1,hspace=0.1)
 plt.savefig('corrxxmx',dpi=300,bbox_inches='tight')
