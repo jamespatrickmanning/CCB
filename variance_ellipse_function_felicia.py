@@ -14,8 +14,8 @@ Flowcharted by JiM in July 2019 as "variance_ellipse.drawio"
 #for Python <3
 #from mpl_toolkits.basemap import Basemap 
 #for Python 3
-#conda install -c conda-forge basemap 
-#conda install -c conda-forge basemap-data-hires
+conda install -c conda-forge basemap 
+conda install -c conda-forge basemap-data-hires
 
 ###################### PACKAGES #########################
 from matplotlib.patches import Ellipse #, Circle # removing the "Circle" from this registered it as being "used"
@@ -24,7 +24,7 @@ import numpy as np
 import math
 
 ####################### FUNCTIONS #######################
-def variance_ellipses_under_means(ax,gbox,legend_pos,legend_size,max_ellipse_to_ignorema):
+def variance_ellipses_under_means(ax,gbox,legend_pos,legend_size,max_ellipse_to_ignore):
   # HARDCODE examples
   # gbox=[-70.75,-69.8,41.5,42.25]
   # legend_pos=[-69.9,41.55]
@@ -35,8 +35,8 @@ def variance_ellipses_under_means(ax,gbox,legend_pos,legend_size,max_ellipse_to_
   print ('loading modeled velocity for long time ')
   lo=np.load('lombx.npy')
   la=np.load('lambx.npy')
-  us1=np.load('umb18_23.npy')
-  vs1=np.load('vmb18_23.npy')
+  us1=np.load('umb18_23.npy')#must reguest file from author because the file size is too large for GitHub
+  vs1=np.load('vmb18_23.npy')#must reguest file from author because the file size is too large for GitHub
   ff=1.0
   x=lo
   y=la
