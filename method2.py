@@ -3,6 +3,8 @@
 Created on Sat Nov  3 18:31:28 2018
 
 @author: xiaojian
+Modifications by JiM in Sep 2019 after PlosOne 2nd review
+Note: There are two options using the circle.
 """
 from math import radians, cos, sin, atan, sqrt 
 import numpy as np
@@ -49,7 +51,7 @@ for a in np.arange(len(CL['lon'])):
 fig = plt.figure(figsize=(5,5))
 ax = fig.add_subplot(111)
 ax.plot(cl['lon'],cl['lat'],color='black')
-ax.scatter(lon,lat,color='red')
+ax.scatter(lon,lat,color='red',s=80)
 ax.axis([lon-size,lon+size,lat-size,lat+size])
 cir1 = Circle(xy = (lon, lat), radius=r, alpha=0.5)
 ax.add_patch(cir1)
@@ -66,13 +68,13 @@ lat1=insidep[0][1]
 lon2=insidep[-1][0]
 lat2=insidep[-1][1]
 
-ax.scatter(lon1,lat1)
-ax.scatter(lon2,lat2)
+ax.scatter(lon1,lat1,s=80,color='green')
+ax.scatter(lon2,lat2,s=80,color='green')
 lonz=(lon1+lon2)/2.0
 latz=(lat1+lat2)/2.0
-ax.scatter(lonz,latz,color='green')
+ax.scatter(lonz,latz,color='green',s=80)
 ax.plot([lon1,lon2],[lat1,lat2])
-ax.scatter(lonz,latz)
+ax.scatter(lonz,latz,s=80)
 
 
 
@@ -88,9 +90,12 @@ if d1>d2:
 else:
     lon_w=lon_w2
     lat_w=k*(lon_w-lonz)+latz
-ax.scatter(lon_w,lat_w,color='yellow')
+ax.scatter(lon_w,lat_w,color='cyan',s=80)
 ax.plot([lon,lon_w],[lat,lat_w])
-plt.savefig('circle1')
+plt.gca().ticklabel_format(axis='both', style='plain', useOffset=False)
+plt.xlabel('longitude')
+plt.ylabel('latitude')
+plt.savefig('/net/pubweb_html/epd/ocean/MainPage/turtle/ccbay/circle1.png')
 plt.show()
 #######################################################################################################3
 lon=-70.087
@@ -114,7 +119,7 @@ for a in np.arange(len(CL['lon'])):
 fig = plt.figure(figsize=(5,5))
 ax = fig.add_subplot(111)
 ax.plot(cl['lon'],cl['lat'],color='black')
-ax.scatter(lon,lat,color='red')
+ax.scatter(lon,lat,color='red',s=80)
 ax.axis([lon-size,lon+size,lat-size,lat+size])
 cir1 = Circle(xy = (lon, lat), radius=r, alpha=0.5)
 ax.add_patch(cir1)
@@ -131,13 +136,13 @@ lat1=insidep[0][1]
 lon2=insidep[-1][0]
 lat2=insidep[-1][1]
 
-ax.scatter(lon1,lat1)
-ax.scatter(lon2,lat2)
+ax.scatter(lon1,lat1,s=80)
+ax.scatter(lon2,lat2,s=80)
 lonz=(lon1+lon2)/2.0
 latz=(lat1+lat2)/2.0
-ax.scatter(lonz,latz,color='green')
+ax.scatter(lonz,latz,color='green',s=80)
 ax.plot([lon1,lon2],[lat1,lat2])
-ax.scatter(lonz,latz)
+ax.scatter(lonz,latz,s=80,)
 
 
 
@@ -153,9 +158,12 @@ if d1>d2:
 else:
     lon_w=lon_w2
     lat_w=k*(lon_w-lonz)+latz
-ax.scatter(lon_w,lat_w,color='yellow')
+ax.scatter(lon_w,lat_w,color='cyan',s=80)
 ax.plot([lon,lon_w],[lat,lat_w])
-plt.savefig('circle2')
+plt.gca().ticklabel_format(axis='both', style='plain', useOffset=False)
+plt.xlabel('longitude')
+plt.ylabel('latitude')
+plt.savefig('/net/pubweb_html/epd/ocean/MainPage/turtle/ccbay/circle2.png')
 plt.show()
 #######################################################################################
 

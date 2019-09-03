@@ -3,6 +3,7 @@
 Created on Sat Nov  3 21:19:50 2018
 
 @author: xiaojian
+Modifications by JiM after 2nd PlosOne review in Sep 2019
 """
 from math import radians, cos, sin, atan, sqrt 
 import numpy as np
@@ -47,14 +48,16 @@ for a in np.arange(len(CL['lon'])):
 fig = plt.figure(figsize=(5,5))
 ax = fig.add_subplot(111)
 ax.plot(cl['lon'],cl['lat'],color='black')
-ax.scatter(lon,lat,color='red')
+ax.scatter(lon,lat,color='red',s=80)
+ax.annotate('stranding report',xy=(lon,lat),xytext=(.1,.1),textcoords='axes fraction',color='red',arrowprops=dict(facecolor='black', shrink=0.05))
 ax.axis([lon-size,lon+size,lat-size,lat+size])
 dis=[]
 for a in np.arange(len(cl['lon'])):
     d=haversine(cl['lon'][a],cl['lat'][a],lon,lat)
     dis.append(d)
 index=np.argmin(dis)
-plt.scatter(cl['lon'][index],cl['lat'][index],color='green')
+plt.scatter(cl['lon'][index],cl['lat'][index],color='green',s=80)
+ax.annotate('coastline intersection',xy=(cl['lon'][index],cl['lat'][index]),xytext=(.5,.7),textcoords='axes fraction',color='green',arrowprops=dict(facecolor='black', shrink=0.05))
 lonz=cl['lon'][index]
 latz=cl['lat'][index]
 k=(latz-lat)/(lonz-lon)
@@ -69,8 +72,16 @@ if d1>d2:
 else:
     lon_w=lon_w2
     lat_w=k*(lon_w-lonz)+latz
-ax.scatter(lon_w,lat_w,color='yellow')
+ax.scatter(lon_w,lat_w,color='cyan',s=80)
+ax.annotate('offshore point to start tracking',xy=(lon_w,lat_w),xytext=(.1,.8),textcoords='axes fraction',color='cyan',arrowprops=dict(facecolor='black', shrink=0.05))
 ax.plot([lon,lon_w],[lat,lat_w])
+ax.text(max(cl['lon'])-.02,max(cl['lat'])+.015,'ocean')
+ax.text(max(cl['lon'])-.02,min(cl['lat']),'land')
+#ax.xaxis.set_major_formatter(FormatStrFormatter('%.2f'))# added 9/2019
+#ax.yaxis.set_major_formatter(FormatStrFormatter('%.2f'))
+plt.gca().ticklabel_format(axis='both', style='plain', useOffset=False)
+plt.xlabel('longitude')
+plt.ylabel('latitude')
 plt.savefig('method1')
 plt.show()
 
